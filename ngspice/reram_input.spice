@@ -1,7 +1,7 @@
-* ReRAM Step Pulse Time Analysis
+* ReRAM Step Pulse Time Analysis (without .step)
 
 .param VSTEP=1.8
-.param PW=100n  ; Default value, will be overridden in .control
+.param PW=100n  ; Initial value, will be overridden
 
 V1 TE 0 PULSE(0 {VSTEP} 0 1n 1n {PW} {2*PW})
 
@@ -16,7 +16,7 @@ set filetype=ascii
 foreach pw 10n 50n 100n 500n 1u
     alterparam PW $pw
     run
-    write step_pulse_$pw.raw
+    write reram_step_pw_$pw.raw
 end
 .endc
 
