@@ -4,7 +4,7 @@
 V1 TE 0 PULSE(0 {VSTEP} 0 1n 1n {PW} {2*PW})
 XR0 TE 0 sky130_fd_pr_reram__reram_cell Tfilament_0=3.8e-9
 
-* Parameter declarations moved AFTER usage to allow .alter
+* Parameter declarations
 .param VSTEP=1.8
 .param PW=100n
 
@@ -15,25 +15,19 @@ XR0 TE 0 sky130_fd_pr_reram__reram_cell Tfilament_0=3.8e-9
 .control
 set filetype=ascii
 
-alter .param PW=10n
-run
-write pw_10n.raw
+* Define a list of pulse widths
+let pw_list = [10n 50n 100n 500n 1u]
+let i = 0
 
-alter .param PW=50n
-run
-write pw_50n.raw
+* Loop over each pulse width
+while i < length(pw_list)
+    alterparam PW = pw_list[i]
+    reset
+    run
+    write pw_$&pw_list[i].raw
+    let i = i + 1
+end
 
-alter .param PW=100n
-run
-write pw_100n.raw
-
-alter .param PW=500n
-run
-write pw_500n.raw
-
-alter .param PW=1u
-run
-write pw_1u.raw
 .endc
 
 .end
