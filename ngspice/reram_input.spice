@@ -1,19 +1,23 @@
-ReRAM Example
+* ReRAM Step Pulse Time Analysis
 
 .param VSTEP=1.8
-.param PW=100n
+.param PW=100n  ; Default value, will be overridden in .control
 
 V1 TE 0 PULSE(0 {VSTEP} 0 1n 1n {PW} {2*PW})
 
 XR0 TE 0 sky130_fd_pr_reram__reram_cell Tfilament_0=3.8e-9
 
 .tran 0.1n 2u
-.step param PW list 10n 50n 100n 500n 1u
 
 .include /content/rram_model/ngspice/sky130_fd_pr_reram__reram_cell.spice
 
 .control
 set filetype=ascii
+foreach pw 10n 50n 100n 500n 1u
+    alterparam PW $pw
+    run
+    write step_pulse_$pw.raw
+end
 .endc
 
 .end
