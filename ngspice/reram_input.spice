@@ -13,9 +13,7 @@ XR0 TE 0 sky130_fd_pr_reram__reram_cell Tfilament_0=3.8e-9
 .inc /foss/pdks/sky130B/libs.tech/ngspice/sky130_fd_pr_reram__reram_cell.spice
 
 .control
-run
 set filetype=ascii
-write step_pulse_analysis.raw
 .endc
 
 .end
