@@ -1,12 +1,12 @@
 * ReRAM Step Pulse Time Analysis
 
-* Default values
+* Circuit description
+V1 TE 0 PULSE(0 {VSTEP} 0 1n 1n {PW} {2*PW})
+XR0 TE 0 sky130_fd_pr_reram__reram_cell Tfilament_0=3.8e-9
+
+* Parameter declarations moved AFTER usage to allow .alter
 .param VSTEP=1.8
 .param PW=100n
-
-V1 TE 0 PULSE(0 {VSTEP} 0 1n 1n {PW} {2*PW})
-
-XR0 TE 0 sky130_fd_pr_reram__reram_cell Tfilament_0=3.8e-9
 
 .tran 0.1n 2u
 
@@ -34,7 +34,6 @@ write pw_500n.raw
 alter .param PW=1u
 run
 write pw_1u.raw
-
 .endc
 
 .end
