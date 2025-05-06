@@ -1,4 +1,4 @@
-* ReRAM Step Pulse Time Analysis
+ReRAM Step Pulse Time Analysis
 
 .param VSTEP=1.8
 .param PW=100n
